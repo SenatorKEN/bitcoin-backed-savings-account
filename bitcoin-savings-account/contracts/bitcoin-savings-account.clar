@@ -16,9 +16,17 @@
     accumulated-interest: uint
   }
 )
-
 ;; Interest Rate Configuration
-(define-data-var base-interest-rate uint u5) ; 5% base rate
-(define-data-var max-interest-rate uint u10) ; 10% max rate
-(define-data-var min-interest-rate uint u2)  ; 2% min rate
+(define-data-var base-interest-rate uint u5) ;; 5% base rate
+(define-data-var max-interest-rate uint u10) ;; 10% max rate
+(define-data-var min-interest-rate uint u2)  ;; 2% min rate
+
+;; Deposit Tiers
+(define-map deposit-tiers 
+  {tier: uint} 
+  {
+    min-amount: uint, 
+    interest-bonus: uint
+  }
+)
 
