@@ -139,6 +139,23 @@
   )
 )
 
+;; Security Features
+(define-public (toggle-account-lock (user principal))
+  (let 
+    ((current-metadata (unwrap! 
+                         (map-get? account-metadata {user: user}) 
+                         ERR-ACCOUNT-NOT-FOUND))
+     (current-lock-status (get is-locked current-metadata)))
+    
+    (map-set account-metadata 
+      {user: user}
+      (merge current-metadata 
+             {is-locked: (not current-lock-status)}))
+    
+    (ok (not current-lock-status))
+  )
+)
+
 
       
 
