@@ -49,6 +49,22 @@
   }
 )
 
+;; Interest Configuration
+(define-data-var interest-config 
+  {
+    base-rate: uint,
+    max-rate: uint,
+    min-rate: uint,
+    compound-frequency: uint
+  }
+  {
+    base-rate: u5,     ;; 5% base rate
+    max-rate: u10,     ;; 10% max rate
+    min-rate: u2,      ;; 2% min rate
+    compound-frequency: u365  ;; Annual compounding
+  }
+)
+
  ;; Interest Calculation Function
 (define-private (calculate-interest (user principal))
   (let 
