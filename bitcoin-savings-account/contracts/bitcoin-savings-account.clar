@@ -30,3 +30,29 @@
   }
 )
 
+ ;; Interest Calculation Function
+(define-private (calculate-interest (user principal))
+  (let 
+    (
+      (account 
+        (unwrap! 
+          (map-get? user-accounts {user: user}) 
+          u0
+        )
+      )
+      (base-rate (var-get base-interest-rate))
+      (balance (get balance account))
+      (time-since-deposit (- stacks-block-height (get last-deposit-time account)))
+      
+      ;; Dynamic interest calculation
+      (interest 
+        (/ 
+          (* balance base-rate time-since-deposit) 
+          u36500 ;; Annualized calculation
+        )
+      )
+    )
+    interest
+  )
+)
+
