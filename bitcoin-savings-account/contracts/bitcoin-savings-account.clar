@@ -101,6 +101,22 @@
   }
 )
 
+;; Interest Calculation Function
+(define-private (calculate-compound-interest 
+                 (principal uint) 
+                 (rate uint) 
+                 (time uint))
+  (let 
+    ((compound-frequency (get compound-frequency (var-get interest-config))))
+    (/ 
+      (* principal 
+         (pow (+ u1 (/ rate compound-frequency)) 
+              (* time compound-frequency))) 
+      u1
+    )
+  )
+)
+
 
 
       
