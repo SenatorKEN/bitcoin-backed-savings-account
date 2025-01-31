@@ -156,6 +156,12 @@
   )
 )
 
+;; Utility Functions
+(define-read-only (get-account-balance (user principal))
+  (match (map-get? user-accounts {user: user})
+    account (some (get balance account))
+    none)
+)
 
       
 
