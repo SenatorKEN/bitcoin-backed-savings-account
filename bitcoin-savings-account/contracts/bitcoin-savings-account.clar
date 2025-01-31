@@ -118,6 +118,27 @@
 )
 
 
+;; Advanced Deposit with Tier Management
+(define-public (deposit-with-tier 
+                (amount uint) 
+                (tier uint))
+  (let 
+    ((user tx-sender)
+     (tier-info (map-get? deposit-tiers {tier: tier}))
+     (account (map-get? user-accounts {user: user}))
+     (metadata (map-get? account-metadata {user: user})))
+    
+    (match tier-info
+      info
+      (if (>= amount (get min-amount info))
+        ;; Deposit logic with tier bonus
+        (ok true)
+        (err ERR-MINIMUM-DEPOSIT))
+      (err ERR-INVALID-CONFIGURATION)
+    )
+  )
+)
+
 
       
 
