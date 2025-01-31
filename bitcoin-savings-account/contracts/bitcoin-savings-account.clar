@@ -4,6 +4,11 @@
 (define-constant ERR-INSUFFICIENT-BALANCE (err u2))
 (define-constant ERR-MINIMUM-DEPOSIT (err u3))
 (define-constant ERR-WITHDRAWAL-FAILED (err u4))
+(define-constant ERR-WITHDRAWAL-LIMIT (err u5))
+(define-constant ERR-DEPOSIT-LIMIT (err u6))
+(define-constant ERR-ACCOUNT-NOT-FOUND (err u7))
+(define-constant ERR-INVALID-CONFIGURATION (err u8))
+
 
 ;; Savings Account Storage
 (define-map user-accounts 
@@ -16,6 +21,8 @@
     accumulated-interest: uint
   }
 )
+
+
 ;; Interest Rate Configuration
 (define-data-var base-interest-rate uint u5) ;; 5% base rate
 (define-data-var max-interest-rate uint u10) ;; 10% max rate
@@ -27,6 +34,18 @@
   {
     min-amount: uint, 
     interest-bonus: uint
+  }
+)
+
+;; Enhanced Account Management
+(define-map account-metadata 
+  {user: principal}
+  {
+    withdrawal-limit: uint,
+    deposit-limit: uint,
+    is-locked: bool,
+    account-type: (string-ascii 20),
+    created-at: uint
   }
 )
 
@@ -55,4 +74,8 @@
     interest
   )
 )
+
+
+
+      
 
