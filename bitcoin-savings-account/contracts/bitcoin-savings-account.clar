@@ -91,6 +91,16 @@
   )
 )
 
+;; Access Control Mechanism
+(define-map account-permissions
+  {user: principal}
+  {
+    can-deposit: bool,
+    can-withdraw: bool,
+    can-transfer: bool
+  }
+)
+
 
 
       
